@@ -16,7 +16,8 @@ foreach (var user in cord.Users) {
 }
 
 // Enter room by URI link
-await cord.EnterRoom("3ir5ug379kp");
+var roomLink = "3ir5ug379kp";
+await cord.EnterRoom(roomLink);
 
 
 cord.MessageCreated += async (room, message) => {
@@ -49,6 +50,17 @@ cord.MessageCreated += async (room, message) => {
         await room.SendMessage("Don't swar!");
     }
 };
+
+// Get room by URI link
+var currentRoom = cord.Rooms.First(x => x.Link == roomLink);
+
+// Add BOT to the queue
+try {
+    await currentRoom.AddToQueue(cord.CurrentUser);
+    Console.WriteLine("Added to queue");
+} catch {
+    Console.WriteLine("Not in queue");
+}
 
 // Wait 'till the world ends
 await Task.Delay(-1);
