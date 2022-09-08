@@ -47,7 +47,7 @@ cord.MessageCreated += async (room, message) => {
     
     if (text.Contains("fuck")) {
         await message.Delete();
-        await room.SendMessage("Don't swar!");
+        await room.SendMessage("Don't swear!");
     }
 };
 
